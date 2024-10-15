@@ -1,0 +1,38 @@
+:root {
+  --width: 1920;
+  --height: 1080;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  position: relative;
+  margin: 0;
+}
+
+#ui {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(var(--width) * 1px);
+  height: calc(var(--height) * 1px);
+  transform: translate(-50%, -50%) scale(var(--scale, 0));
+  transform-origin: center;
+  box-sizing: border-box;
+  z-index: 10;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* this is just for testing purposes */
+h1 {
+  color: black;
+  font-size: 128px;
+  position: relative;
+  left: 0;
+  top: 0;
+}
