@@ -36,57 +36,60 @@ export default function initGame() {
     "player",
     {
       speed: 800,
+      direction: k.vec2(0, 0),
     },
   ]);
 
   player.onUpdate(() => {
-    const movementVector = k.vec2(0, 0);
+    player.direction.x = 0;
+    player.direction.y = 0;
 
-    console.log(k.isKeyDown("left"));
-
-    if (k.isKeyDown("left")) movementVector.x = -1;
-    if (k.isKeyDown("right")) movementVector.x = 1;
-    if (k.isKeyDown("up")) movementVector.y = -1;
-    if (k.isKeyDown("down")) movementVector.y = 1;
+    if (k.isKeyDown("left")) player.direction.x = -1;
+    if (k.isKeyDown("right")) player.direction.x = 1;
+    if (k.isKeyDown("up")) player.direction.y = -1;
+    if (k.isKeyDown("down")) player.direction.y = 1;
 
     if (
-      movementVector.eq(k.vec2(-1, 0)) &&
+      player.direction.eq(k.vec2(-1, 0)) &&
       player.getCurAnim().name !== "left"
     ) {
       player.play("left");
     }
 
     if (
-      movementVector.eq(k.vec2(1, 0)) &&
+      player.direction.eq(k.vec2(1, 0)) &&
       player.getCurAnim().name !== "right"
     ) {
       player.play("right");
     }
 
-    if (movementVector.eq(k.vec2(0, -1)) && player.getCurAnim().name !== "up") {
+    if (
+      player.direction.eq(k.vec2(0, -1)) &&
+      player.getCurAnim().name !== "up"
+    ) {
       player.play("up");
     }
 
     if (
-      movementVector.eq(k.vec2(0, 1)) &&
+      player.direction.eq(k.vec2(0, 1)) &&
       player.getCurAnim().name !== "down"
     ) {
       player.play("down");
     }
 
     if (
-      movementVector.eq(k.vec2(0, 0)) &&
+      player.direction.eq(k.vec2(0, 0)) &&
       !player.getCurAnim().name.includes("idle")
     ) {
       player.play(`${player.getCurAnim().name}-idle`);
     }
 
-    if (movementVector.x && movementVector.y) {
-      player.move(movementVector.scale(DIAGONAL_FACTOR * player.speed));
+    if (player.direction.x && player.direction.y) {
+      player.move(player.direction.scale(DIAGONAL_FACTOR * player.speed));
       return;
     }
 
-    player.move(movementVector.scale(player.speed));
+    player.move(player.direction.scale(player.speed));
   });
 
   const npc = k.add([
@@ -97,4 +100,22 @@ export default function initGame() {
     k.scale(8),
     k.pos(1480, 500),
   ]);
+
+  npc.onCollide("player", (player) => {
+    if (player.direction.eq(k.vec2(0, -1))) {
+      npc.play("npc-down");
+    }
+
+    if (player.direction.eq(k.vec2(0, 1))) {
+      npc.play("npc-up");
+    }
+
+    if (player.direction.eq(k.vec2(1, 0))) {
+      npc.play("npc-left");
+    }
+
+    if (player.direction.eq(k.vec2(-1, 0))) {
+      npc.play("npc-right");
+    }
+  });
 }
