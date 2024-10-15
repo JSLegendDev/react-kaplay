@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: "gameboy";
-  src: url(./gameboy.ttf);
+  src: url(../public/gameboy.ttf);
 }
 
 :root {
