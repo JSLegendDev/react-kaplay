@@ -1,7 +1,9 @@
+import TextBox from "./ReactComponents/TextBox";
+
 export default function ReactUI() {
   return (
     <>
-      <h1>Hello World!</h1>
+      <TextBox />
     </>
   );
 }

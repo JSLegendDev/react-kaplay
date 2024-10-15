@@ -1,0 +1,20 @@
+.text-box {
+  position: relative;
+  top: 700px;
+  left: 60px;
+  width: 1800px;
+  height: 360px;
+  background-color: black;
+  overflow: hidden;
+  border-radius: 12px;
+  font-family: "gameboy";
+}
+
+.text-box > p {
+  margin-top: 64px;
+  margin-bottom: 12px;
+  margin-left: 64px;
+  margin-right: 64px;
+  font-size: 72px;
+  color: var(--font-color);
+}

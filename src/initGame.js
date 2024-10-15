@@ -1,4 +1,5 @@
 import initKaplay from "./kaplayCtx";
+import { isTextBoxVisibleAtom, store, textBoxContentAtom } from "./store";
 
 export default function initGame() {
   const DIAGONAL_FACTOR = 1 / Math.sqrt(2);
@@ -103,19 +104,25 @@ export default function initGame() {
 
   npc.onCollide("player", (player) => {
     if (player.direction.eq(k.vec2(0, -1))) {
+      store.set(textBoxContentAtom, "Beautiful day, isn't it?");
       npc.play("npc-down");
     }
 
     if (player.direction.eq(k.vec2(0, 1))) {
       npc.play("npc-up");
+      store.set(textBoxContentAtom, "Those rocks are heavy!");
     }
 
     if (player.direction.eq(k.vec2(1, 0))) {
       npc.play("npc-left");
+      store.set(textBoxContentAtom, "This text box is made with React.js!");
     }
 
     if (player.direction.eq(k.vec2(-1, 0))) {
+      store.set(textBoxContentAtom, "Is the water too cold?");
       npc.play("npc-right");
     }
+
+    store.set(isTextBoxVisibleAtom, true);
   });
 }

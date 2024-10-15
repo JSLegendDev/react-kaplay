@@ -1,6 +1,18 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "gameboy";
+  src: url(./gameboy.ttf);
+}
+
 :root {
   --width: 1920;
   --height: 1080;
+  --font-color: #e1d8d4;
 }
 
 html,

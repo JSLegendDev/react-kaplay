@@ -1,5 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { Provider } from "jotai";
+import { store } from "./store.js";
+
 import ReactUI from "./ReactUI.jsx";
 import initGame from "./initGame.js";
 
@@ -19,7 +22,9 @@ new ResizeObserver(() => {
 
 createRoot(document.getElementById("ui")).render(
   <StrictMode>
-    <ReactUI />
+    <Provider store={store}>
+      <ReactUI />
+    </Provider>
   </StrictMode>
 );
 
